@@ -7,7 +7,8 @@ import {
   SidebarHeader,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarGroupLabel
+  SidebarGroupLabel,
+  SidebarMenu
 } from "@/components/ui/sidebar"
 import { Home, Music, Podcast, Users2 } from "lucide-react";
 import Image from "next/image";
@@ -61,6 +62,13 @@ export function AppSidebar() {
                 </SidebarGroupContent>
             </SidebarGroup>
         </SidebarContent>
+        <SidebarFooter>
+            <SidebarMenu>
+                <SidebarMenuItem>
+                    
+                </SidebarMenuItem>
+            </SidebarMenu>
+        </SidebarFooter>
     </Sidebar>
   )
 }
