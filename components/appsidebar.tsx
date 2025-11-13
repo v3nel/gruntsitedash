@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Home, Music, Podcast, Users2 } from "lucide-react";
 import Image from "next/image";
+import { Userdata } from "@/components/user";
 
 const items = [
     {
@@ -63,11 +64,11 @@ export function AppSidebar() {
             </SidebarGroup>
         </SidebarContent>
         <SidebarFooter>
-            <SidebarMenu>
-                <SidebarMenuItem>
-                    
-                </SidebarMenuItem>
-            </SidebarMenu>
+            <Userdata user={{
+                avatar: "adada",
+                name: "John Doe",
+                email: "johndoe@gmail.com"
+            }}/>
         </SidebarFooter>
     </Sidebar>
   )
