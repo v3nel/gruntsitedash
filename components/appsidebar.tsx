@@ -8,32 +8,31 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarGroupLabel,
-  SidebarMenu
 } from "@/components/ui/sidebar"
-import { Home, Music, Podcast, Users2 } from "lucide-react";
+import { LayoutGrid, ContactRound, Users2, PodcastIcon, Send } from "lucide-react";
 import Image from "next/image";
 import { Userdata } from "@/components/user";
 
 const items = [
     {
-        title: "Acceuil",
+        title: "Vue d'Ensemble",
         url: "/",
-        icon: Home
+        icon: LayoutGrid
+    },
+    {
+        title: "Posts",
+        url: "/posts",
+        icon: Send
     },
     {
         title: "Utilisateurs",
-        url: "/users",
+        url: "/utilisateurs",
         icon: Users2
     },
     {
         title: "Podcasts",
         url: "/podcasts",
-        icon: Podcast
-    },
-    {
-        title: "Musique",
-        url: "/musique",
-        icon: Music
+        icon: PodcastIcon
     }
 ]
 
@@ -42,8 +41,10 @@ export function AppSidebar() {
     <Sidebar>
         <SidebarHeader className="mt-3 ml-2">
             <div>
-                <Image src="/logo/grunt-logo-dark.svg" alt="Logo" height={34} width={128} className="block dark:hidden" />
-                <Image src="/logo/grunt-logo-light.svg" alt="Logo" height={34} width={128} className="hidden dark:block" />
+                <a href="/">
+                    <Image src="/logo/grunt-logo-dark.svg" alt="Logo" height={34} width={128} className="block dark:hidden" />
+                    <Image src="/logo/grunt-logo-light.svg" alt="Logo" height={34} width={128} className="hidden dark:block" />
+                </a>
             </div>
         </SidebarHeader>
         <SidebarContent>
@@ -67,7 +68,7 @@ export function AppSidebar() {
             <Userdata user={{
                 avatar: "adada",
                 name: "John Doe",
-                email: "johndoe@gmail.com"
+                email: "johndoe@gruntmag.com"
             }}/>
         </SidebarFooter>
     </Sidebar>

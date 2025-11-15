@@ -5,6 +5,9 @@ import { Analytics } from "@vercel/analytics/next";
 
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
+import { SidebarProvider } from "@/components/ui/sidebar";
+import AppShell from "@/components/app-shell";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -37,7 +40,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <SidebarProvider>
+           <AppShell>{children}</AppShell>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>

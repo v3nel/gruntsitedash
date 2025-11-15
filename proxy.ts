@@ -4,7 +4,20 @@ import type { NextRequest } from "next/server";
 export function proxy(request: NextRequest) {
   const token = request.cookies.get("authToken");
 
-  if (!token && !request.nextUrl.pathname.startsWith("/login")) {
+  if (
+    request.nextUrl.pathname.startsWith("/_next") ||
+    request.nextUrl.pathname.startsWith("/favicon.ico") ||
+    request.nextUrl.pathname.startsWith("/logo") ||
+    request.nextUrl.pathname.startsWith("/api")
+  ) {
+    return NextResponse.next();
+  }
+
+  if (request.nextUrl.pathname === "/login") {
+    return NextResponse.next();
+  }
+
+  if (!token) {
     const loginUrl = new URL("/login", request.url);
     return NextResponse.redirect(loginUrl);
   }
@@ -13,5 +26,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/dashboard/:path*", "/admin/:path*"],
+  matcher: ["/:path*"], // Apply middleware to all pages
 };

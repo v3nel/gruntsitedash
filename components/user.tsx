@@ -9,7 +9,7 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronsUpDown } from "lucide-react";
+import { ChevronsUpDown, Moon, Sun } from "lucide-react";
 import {
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -17,6 +17,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel
 } from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
+import { useIsMobile } from "@/hooks/use-mobile"; // Import the custom hook
+import { useTheme } from "next-themes";
 
 export function Userdata({
     user,
@@ -27,6 +30,10 @@ export function Userdata({
         avatar: string;
     };
 }) {
+    const isMobile = useIsMobile(); // Use the custom hook
+    const router = useRouter();
+    const { theme, setTheme } = useTheme();
+
     return (
         <SidebarMenu>
             <SidebarMenuItem>
@@ -45,7 +52,7 @@ export function Userdata({
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                         className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-                        side={"right"}
+                        side={isMobile ? "top" : "right"} // Adjust dropdown position based on mobile
                         align="end"
                         sideOffset={4}
                     >
@@ -57,25 +64,26 @@ export function Userdata({
                                 </div>
                             </div>
                         </DropdownMenuLabel>
-                        <DropdownMenuSeparator />
+                        <DropdownMenuSeparator/>
                         <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                Upgrade to Pro
+                            <DropdownMenuItem onClick={() => {router.replace("/compte")}}>
+                                Compte
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {setTheme(theme === "dark" ? "light" : "dark")}}>
+                                { theme === "dark" ? (
+                                    <>
+                                        Mode Clair
+                                        <Sun className="ml-auto"/>
+                                    </>
+                                ) : (
+                                    <>
+                                        Mode Sombre
+                                        <Moon className="ml-auto"/>
+                                    </>
+                                )}
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                Account
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                Billing
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                Notifications
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
+                        <DropdownMenuSeparator/>
                         <DropdownMenuItem>
                             Log out
                         </DropdownMenuItem>
